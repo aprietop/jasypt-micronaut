@@ -1,0 +1,39 @@
+plugins {
+    id("io.micronaut.library") version "4.4.0"
+
+}
+
+version = "0.1"
+group = "io.github.aprietop"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.jasypt:jasypt:1.9.3")
+    testImplementation("io.micronaut.test:micronaut-test-junit5")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+micronaut {
+
+}
+micronaut {
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("io.github.aprietop.*")
+    }
+}
+
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
+}
+
+
+
+
+
