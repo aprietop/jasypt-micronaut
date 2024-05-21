@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest
 class JasyptPropertyExpressionResolverTest {
-    ;
 
     private final PropertyResolver propertyResolver;
     private final ConversionService conversionService;
@@ -48,4 +47,5 @@ class JasyptPropertyExpressionResolverTest {
         assertTrue(resolved.isPresent());
         assertEquals("some-text", resolved.get());
     }
+
 }
