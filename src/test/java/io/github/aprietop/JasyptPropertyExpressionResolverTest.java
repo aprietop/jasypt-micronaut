@@ -23,7 +23,7 @@ class JasyptPropertyExpressionResolverTest {
 
     public JasyptPropertyExpressionResolverTest(PropertyResolver propertyResolver,
                                                 ConversionService conversionService,
-                                                @Value("jasypt.encrypted-value") String value) {
+                                                @Value("test.encrypted-value") String value) {
         this.propertyResolver = propertyResolver;
         this.conversionService = conversionService;
         this.value = value;

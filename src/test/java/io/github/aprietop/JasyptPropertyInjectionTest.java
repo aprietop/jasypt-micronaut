@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @MicronautTest
 public class JasyptPropertyInjectionTest {
 
-    @Value("${jasypt.encrypted-property}")
+    @Value("${my.secret.property}")
     private String property;
 
     @Test

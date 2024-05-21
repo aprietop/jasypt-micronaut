@@ -7,7 +7,6 @@ This Micronaut library provides easy-to-use integration with Jasypt for encrypti
 
 - Seamless integration with Micronaut configuration.
 - Encrypt and decrypt properties in application configuration files.
-- Support for various encryption algorithms and configuration options.
 
 ### Getting Started
 
