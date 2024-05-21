@@ -13,7 +13,6 @@ public class JasyptPropertyExpressionResolver implements PropertyExpressionResol
     public static final String JASYPT_PASSWORD_PROPERTY_NAME = "jasypt.encryption.password";
     private final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
 
-
     @Override
     public <T> Optional<T> resolve(PropertyResolver propertyResolver,
                                    ConversionService conversionService,
@@ -28,8 +27,6 @@ public class JasyptPropertyExpressionResolver implements PropertyExpressionResol
         }
         return Optional.empty();
     }
-
-
 
     boolean isJasyptExpression(String expression) {
         return expression.startsWith(JASYPT_PREFIX);
