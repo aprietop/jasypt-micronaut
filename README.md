@@ -62,11 +62,11 @@ Use the encrypted value in your `application.yml` or `application.properties`:
 ```yaml
 my:
   secret:
-    property: ENC(GO9jHf7yVuP4E7oGzQmYkQ==)
+    property: ${ENC(GO9jHf7yVuP4E7oGzQmYkQ==)}
 ```
 
 ```properties
-my.secret.property=ENC(GO9jHf7yVuP4E7oGzQmYkQ==)
+my.secret.property=${ENC(GO9jHf7yVuP4E7oGzQmYkQ==)}
 ```
 
 #### 4. Accessing Decrypted Properties
