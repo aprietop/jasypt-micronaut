@@ -19,14 +19,27 @@ public class JasyptPropertyExpressionResolver implements PropertyExpressionResol
                                    ConversionService conversionService,
                                    String expression,
                                    Class<T> requiredType) {
-        if (expression.startsWith(JASYPT_PREFIX)) {
+        if (isJasyptExpression(expression)) {
             if (!encryptor.isInitialized()) {
                 propertyResolver.getProperty(JASYPT_PASSWORD_PROPERTY_NAME, String.class)
                         .ifPresent(encryptor::setPassword);
             }
-            String decrypted = this.encryptor.decrypt(expression.substring(JASYPT_PREFIX.length(), expression.length() - 1));
-            return Optional.of(conversionService.convertRequired(decrypted, requiredType));
+            return Optional.of(conversionService.convertRequired(decrypt(expression), requiredType));
         }
         return Optional.empty();
+    }
+
+
+
+    boolean isJasyptExpression(String expression) {
+        return expression.startsWith(JASYPT_PREFIX);
+    }
+
+    String decrypt(String expression) {
+        return this.encryptor.decrypt(extractValue(expression));
+    }
+
+    String extractValue(String expression) {
+        return expression.substring(JASYPT_PREFIX.length(), expression.length() - 1);
     }
 }
