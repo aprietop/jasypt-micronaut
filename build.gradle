@@ -18,9 +18,6 @@ dependencies {
 }
 
 micronaut {
-
-}
-micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
@@ -70,24 +67,12 @@ publishing {
                 }
             }
         }
-        mavenJava(MavenPublication) {
-            from components.java
-            versionMapping {
-                usage("java-api") {
-                    fromResolutionOf("runtimeClasspath")
-                }
-                usage("java-runtime") {
-                    fromResolutionResult()
-                }
-            }
-        }
     }
 
     repositories {
         maven {
             url = layout.buildDirectory.dir('staging-deploy')
         }
-        mavenLocal()
     }
 }
 
