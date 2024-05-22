@@ -1,7 +1,7 @@
 plugins {
-    id("io.micronaut.library") version "4.4.0"
-    id 'maven-publish'
-
+    id "io.micronaut.library" version "4.4.0"
+    id "maven-publish"
+    id "org.jreleaser" version "1.12.0"
 }
 
 version = "0.1"
@@ -32,11 +32,44 @@ micronaut {
 java {
     sourceCompatibility = JavaVersion.toVersion("17")
     targetCompatibility = JavaVersion.toVersion("17")
-}
+    withJavadocJar()
+    withSourcesJar()
 
+}
 
 publishing {
     publications {
+        maven(MavenPublication) {
+            groupId = 'io.github.aprietop'
+            artifactId = 'jasypt-micronaut'
+
+            from components.java
+
+            pom {
+                name = 'jasypt-micronaut'
+                description = 'Jasypt application properties for Micronaut'
+                url = 'https://github.com/aprietop/jasypt-micronaut'
+                inceptionYear = '2024'
+                licenses {
+                    license {
+                        name = 'Apache-2.0'
+                        url = 'https://spdx.org/licenses/Apache-2.0.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'aprietop'
+                        name = 'Armando Prieto'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/aprietop/jasypt-micronaut.git'
+                    developerConnection = 'scm:git:ssh://github.com/aprietop/jasypt-micronaut.git'
+                    url = 'https://github.com/aprietop/jasypt-micronaut'
+
+                }
+            }
+        }
         mavenJava(MavenPublication) {
             from components.java
             versionMapping {
@@ -49,12 +82,37 @@ publishing {
             }
         }
     }
+
     repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
         mavenLocal()
     }
 }
 
+jreleaser {
+    signing {
+        active = 'ALWAYS'
+        armored = true
+    }
+    project {
+        description = 'Jasypt application properties for Micronaut'
+        copyright = 'Copyright 2024 original authors'
+    }
 
-
-
-
+    deploy {
+        maven {
+            nexus2 {
+                'maven-central' {
+                    active = 'ALWAYS'
+                    url = 'https://s01.oss.sonatype.org/service/local'
+                    snapshotUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+                    closeRepository = false
+                    releaseRepository = false
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
+    }
+}

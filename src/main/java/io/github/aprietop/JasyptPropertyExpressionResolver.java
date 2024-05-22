@@ -63,10 +63,9 @@ import java.util.Optional;
  * }
  * </pre>
  *
- * @author: Armando Prieto
- * @since: 0.1.0
+ * @author Armando Prieto
+ * @since 0.1.0
  */
-
 public class JasyptPropertyExpressionResolver implements PropertyExpressionResolver {
 
     private static final String JASYPT_PREFIX = "ENC(";
